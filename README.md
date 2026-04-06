@@ -11,7 +11,7 @@
 | 1 | [投資シミュレーター](./investment-sim/) | 毎月1,000円を積み立てると？ | 数列・複利・等比数列 | |
 | 2 | [席替え確率シミュレーター](./seat-shuffle/) | 好きな人の隣になる確率は？ | 確率・組み合わせ・順列 | |
 | 3 | [関数グラフ・アニメーター](./function-grapher/) | グラフの形を動かして感じる | 一次・二次・冪関数 | |
-| 4 | [音波ビジュアライザー](./sound-visualizer/) | 声は sin と cos でできている | 三角関数・フーリエ解析 | [▶ 開く](https://kamiyama-math-apps.vercel.app) |
+| 4 | [音波ビジュアライザー](./sound-visualizer/) | 声は sin と cos でできている | 三角関数・フーリエ解析 | [▶ 開く](https://kamiyama-math-apps.vercel.app/) |
 | 5 | [面積パズル](./area-puzzle/) | 積分って何を足し算してる？ | 面積・極限・微積分 | |
 | 6 | [図形×地図スキャナー](./geometry-map/) | 地図の距離は三平方の定理 | 三平方・座標・ベクトル | |
 
