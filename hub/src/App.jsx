@@ -276,7 +276,7 @@ export default function App() {
           {APPS.map(app => (
             <div key={app.num} className="app-card">
               <div className="card-bar" style={{ background: app.gradient }} />
-              <a href={app.url} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <a href={app.url} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div className="card-visual" style={{ background: `${app.color}12` }}>
                   <span style={{ fontSize: app.num === '05' ? 44 : 52 }}>{app.emoji}</span>
                 </div>
