@@ -315,6 +315,40 @@ body {
   line-height: 1.6;
 }
 
+/* === Light Mode === */
+[data-theme="light"] {
+  --bg: #f8f9fb;
+  --panel: #ffffff;
+  --surface: #f0f2f5;
+  --secondary: #e5e8ed;
+  --border: rgba(0, 0, 0, 0.08);
+  --border-solid: #d1d5db;
+  --accent: #5e6ad2;
+  --accent-h: #4a56c1;
+  --accent-dim: rgba(94, 106, 210, 0.10);
+  --text: #111827;
+  --text-2: #374151;
+  --text-muted: #6b7280;
+  --text-subtle: #9ca3af;
+}
+
+/* === Theme Toggle Button === */
+.btn-theme {
+  display: inline-flex;
+  align-items: center;
+  font-size: 15px;
+  background: var(--surface);
+  border: 1px solid var(--border-solid);
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--text-muted);
+  transition: background 120ms, color 120ms;
+  line-height: 1;
+}
+.btn-theme:hover { background: var(--secondary); color: var(--text); }
+
 /* ── QR Button ── */
 .qr-btn {
   display: flex;

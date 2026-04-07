@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AreaVisualizer } from './components/AreaVisualizer';
 import { StepGuide, STEPS } from './components/StepGuide';
 
@@ -11,8 +11,20 @@ const REAL_WORLD = [
   { icon: '🎵', title: '音楽・信号処理', body: 'フーリエ変換は積分で定義される。音の波形を周波数成分に分解するときに使う。', math: 'フーリエ変換（積分）' },
 ];
 
+const CAREERS = [
+  { icon: '🚀', title: '宇宙工学エンジニア', body: 'ロケットの軌道計算・燃料消費量・衝撃量はすべて積分で算出。JAXAやSpaceXのエンジニアが日常的に使う最重要数学ツール。', field: '宇宙・航空・防衛' },
+  { icon: '🏥', title: '医療画像エンジニア', body: 'CT・MRIの画像再構成には「逆ラドン変換（積分の逆演算）」を使う。機器の設計・精度改善を担う高度技術職。', field: '医療機器・画像処理' },
+  { icon: '🏗️', title: '構造エンジニア', body: '橋・ビル・ダムの設計で「荷重の積分 = 全体にかかる力」を計算。安全係数を積分で求めて構造の強度を保証する。', field: '建築・土木・インフラ' },
+];
+
 export default function App() {
   const [step, setStep] = useState(0);
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
   return (
     <div className="app">
       <header className="app-header">
@@ -21,6 +33,9 @@ export default function App() {
             <a href={HUB_URL} className="btn-back">← 一覧に戻る</a>
             <span className="app-time-badge">⏱ 約5〜7分</span>
             <span className="app-time-badge">App 5 / 6</span>
+            <button className="btn-theme" onClick={() => setTheme(t => t === 'dark' ? 'light' : 'dark')}>
+              {theme === 'dark' ? '☀️' : '🌙'}
+            </button>
           </div>
           <h1 className="app-title">∫ 面積パズル <span className="app-title-badge">基礎数学Ⅰ</span></h1>
           <p className="app-subtitle">微積分への入口 — 「細かく分けて足す」という考え方</p>
@@ -30,17 +45,30 @@ export default function App() {
         <StepGuide currentStep={step} onNext={() => setStep(s => Math.min(s+1, STEPS.length-1))} onPrev={() => setStep(s => Math.max(s-1, 0))} />
         <AreaVisualizer />
         {step === STEPS.length - 1 && (
-          <div className="summary-section">
-            <div className="summary-section-title">🌐 微分・積分が使われている場所</div>
-            <div className="summary-grid">
-              {REAL_WORLD.map(item => (
-                <div className="summary-card" key={item.title}>
-                  <div className="summary-card-icon">{item.icon}</div>
-                  <div><div className="summary-card-title">{item.title}</div><div className="summary-card-body">{item.body}</div><div className="summary-card-math">{item.math}</div></div>
-                </div>
-              ))}
+          <>
+            <div className="summary-section">
+              <div className="summary-section-title">🌐 微分・積分が使われている場所</div>
+              <div className="summary-grid">
+                {REAL_WORLD.map(item => (
+                  <div className="summary-card" key={item.title}>
+                    <div className="summary-card-icon">{item.icon}</div>
+                    <div><div className="summary-card-title">{item.title}</div><div className="summary-card-body">{item.body}</div><div className="summary-card-math">{item.math}</div></div>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+            <div className="summary-section">
+              <div className="summary-section-title">🎯 この数学から広がる仕事</div>
+              <div className="summary-grid">
+                {CAREERS.map(item => (
+                  <div className="summary-card" key={item.title}>
+                    <div className="summary-card-icon">{item.icon}</div>
+                    <div><div className="summary-card-title">{item.title}</div><div className="summary-card-body">{item.body}</div><div className="summary-card-math">{item.field}</div></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
         )}
       </main>
       <footer className="app-footer">神山まるごと高専 — 基礎数学Ⅰ 初回授業 体験アプリ #5 — App 5 of 6</footer>

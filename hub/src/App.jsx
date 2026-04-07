@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const APPS = [
   {
@@ -234,10 +234,22 @@ function TeacherPanel() {
 
 export default function App() {
   const [qrApp, setQrApp] = useState(null);
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   return (
     <div className="page">
       {qrApp && <QrModal app={qrApp} onClose={() => setQrApp(null)} />}
+
+      {/* Theme toggle */}
+      <div style={{ position: 'fixed', top: 16, right: 16, zIndex: 50 }}>
+        <button className="btn-theme" onClick={() => setTheme(t => t === 'dark' ? 'light' : 'dark')}>
+          {theme === 'dark' ? '☀️' : '🌙'}
+        </button>
+      </div>
 
       {/* Hero */}
       <section className="hero">

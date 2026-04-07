@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { MicVisualizer } from './components/MicVisualizer';
 import { SinSynthesizer } from './components/SinSynthesizer';
 import { StepGuide, STEPS } from './components/StepGuide';
@@ -32,12 +32,24 @@ const REAL_WORLD = [
   },
 ];
 
+const CAREERS = [
+  { icon: '🎧', title: '音響エンジニア', body: '映画館・コンサートホールの音響設計、スタジオの録音処理。フーリエ解析でノイズを除去し、音質を最適化する。', field: '音楽・映像・放送' },
+  { icon: '📡', title: '通信エンジニア', body: 'Wi-Fi・5G・衛星通信の設計者。電波（sin波の重ね合わせ）をフーリエ変換で解析・圧縮・送受信するシステムを構築。', field: '通信・インフラ・IoT' },
+  { icon: '🏥', title: '医療機器エンジニア', body: 'MRI・超音波エコー・脳波計（EEG）の設計。体から出る波形をフーリエ解析で分解し、断面画像を生成する装置を開発。', field: '医療・ヘルスケア' },
+];
+
 export default function App() {
   const [currentStep, setCurrentStep] = useState(0);
+  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
   const target = STEPS[currentStep].target;
 
   const handleNext = () => setCurrentStep((s) => Math.min(s + 1, STEPS.length - 1));
   const handlePrev = () => setCurrentStep((s) => Math.max(s - 1, 0));
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   return (
     <div className="app">
@@ -47,6 +59,9 @@ export default function App() {
             <a href={HUB_URL} className="btn-back">← 一覧に戻る</a>
             <span className="app-time-badge">⏱ 約5〜7分</span>
             <span className="app-time-badge">App 4 / 6</span>
+            <button className="btn-theme" onClick={() => setTheme(t => t === 'dark' ? 'light' : 'dark')}>
+              {theme === 'dark' ? '☀️' : '🌙'}
+            </button>
           </div>
           <h1 className="app-title">
             🎵 音の数学
@@ -86,32 +101,45 @@ export default function App() {
 
         {/* Real-world panel — highlighted on step 6 */}
         {target === 'summary' && (
-          <div className="summary-section">
-            <div className="summary-section-title">🌐 フーリエ解析が使われている場所</div>
-            <div className="summary-grid">
-              {REAL_WORLD.map((item) => (
-                <div className="summary-card" key={item.title}>
-                  <div className="summary-card-icon">{item.icon}</div>
-                  <div className="summary-card-content">
-                    <div className="summary-card-title">{item.title}</div>
-                    <div className="summary-card-body">{item.body}</div>
-                    <div className="summary-card-math">{item.math}</div>
+          <>
+            <div className="summary-section">
+              <div className="summary-section-title">🌐 フーリエ解析が使われている場所</div>
+              <div className="summary-grid">
+                {REAL_WORLD.map((item) => (
+                  <div className="summary-card" key={item.title}>
+                    <div className="summary-card-icon">{item.icon}</div>
+                    <div className="summary-card-content">
+                      <div className="summary-card-title">{item.title}</div>
+                      <div className="summary-card-body">{item.body}</div>
+                      <div className="summary-card-math">{item.math}</div>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
 
-            <div className="summary-fourier-box">
-              <div className="summary-fourier-label">フーリエ級数展開（無限個の sin を足す式）</div>
-              <div className="summary-fourier-formula">
-                f(x) = a₀/2 + Σ (aₙ cos nx + bₙ sin nx)
-              </div>
-              <div className="summary-fourier-note">
-                この式1本で、世界中のあらゆる「繰り返す波」を表現できる。
-                考案者：ジョゼフ・フーリエ（1807年、熱方程式を解くために発明）
+              <div className="summary-fourier-box">
+                <div className="summary-fourier-label">フーリエ級数展開（無限個の sin を足す式）</div>
+                <div className="summary-fourier-formula">
+                  f(x) = a₀/2 + Σ (aₙ cos nx + bₙ sin nx)
+                </div>
+                <div className="summary-fourier-note">
+                  この式1本で、世界中のあらゆる「繰り返す波」を表現できる。
+                  考案者：ジョゼフ・フーリエ（1807年、熱方程式を解くために発明）
+                </div>
               </div>
             </div>
-          </div>
+            <div className="summary-section">
+              <div className="summary-section-title">🎯 この数学から広がる仕事</div>
+              <div className="summary-grid">
+                {CAREERS.map((item) => (
+                  <div className="summary-card" key={item.title}>
+                    <div className="summary-card-icon">{item.icon}</div>
+                    <div><div className="summary-card-title">{item.title}</div><div className="summary-card-body">{item.body}</div><div className="summary-card-math">{item.field}</div></div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </>
         )}
       </main>
 
