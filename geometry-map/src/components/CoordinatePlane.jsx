@@ -4,22 +4,24 @@ const W = 800, H = 400;
 const CX = W / 2, CY = H / 2, SCALE = 40;
 
 function drawGrid(ctx) {
-  ctx.fillStyle = '#191a1b';
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  ctx.fillStyle = isLight ? '#f0f2f5' : '#191a1b';
   ctx.fillRect(0, 0, W, H);
-  ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+  ctx.strokeStyle = isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.05)';
   ctx.lineWidth = 1;
   for (let x = CX % SCALE; x < W; x += SCALE) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
   for (let y = CY % SCALE; y < H; y += SCALE) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke(); }
-  ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+  ctx.strokeStyle = isLight ? 'rgba(0,0,0,0.25)' : 'rgba(255,255,255,0.25)';
   ctx.lineWidth = 1.5;
   ctx.beginPath(); ctx.moveTo(0, CY); ctx.lineTo(W, CY); ctx.stroke();
   ctx.beginPath(); ctx.moveTo(CX, 0); ctx.lineTo(CX, H); ctx.stroke();
-  ctx.fillStyle = '#62666d'; ctx.font = '10px Inter'; ctx.textAlign = 'center';
+  const labelColor = isLight ? '#374151' : '#b0b8c8';
+  ctx.fillStyle = labelColor; ctx.font = 'bold 11px Inter'; ctx.textAlign = 'center';
   for (let i = -9; i <= 9; i++) {
     if (i === 0) continue;
     ctx.fillText(i, CX + i * SCALE, CY + 14);
     ctx.textAlign = 'right';
-    ctx.fillText(-i, CX - 4, CY + i * SCALE + 4);
+    ctx.fillText(-i, CX - 6, CY + i * SCALE + 4);
     ctx.textAlign = 'center';
   }
 }

@@ -25,7 +25,9 @@ export function AreaVisualizer() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#191a1b';
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    const labelColor = isLight ? '#374151' : '#b0b8c8';
+    ctx.fillStyle = isLight ? '#f0f2f5' : '#191a1b';
     ctx.fillRect(0, 0, W, H);
 
     const gW = W - PAD.left - PAD.right;
@@ -34,13 +36,13 @@ export function AreaVisualizer() {
     const toY = v => PAD.top + gH - Math.min(v, 1.2) * gH;
 
     // Axes
-    ctx.strokeStyle = 'rgba(255,255,255,0.2)';
+    ctx.strokeStyle = isLight ? 'rgba(0,0,0,0.25)' : 'rgba(255,255,255,0.25)';
     ctx.lineWidth = 1.5;
     ctx.beginPath(); ctx.moveTo(PAD.left, PAD.top + gH); ctx.lineTo(W - PAD.right, PAD.top + gH); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(PAD.left, PAD.top); ctx.lineTo(PAD.left, PAD.top + gH); ctx.stroke();
 
     // X-axis labels
-    ctx.fillStyle = '#62666d'; ctx.font = '10px Inter'; ctx.textAlign = 'center';
+    ctx.fillStyle = labelColor; ctx.font = 'bold 11px Inter'; ctx.textAlign = 'center';
     for (let i = 0; i <= 4; i++) {
       const v = a + (i / 4) * (b - a);
       ctx.fillText(v.toFixed(2), toX(v), PAD.top + gH + 16);

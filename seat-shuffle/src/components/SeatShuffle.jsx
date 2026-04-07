@@ -75,6 +75,17 @@ export function SeatShuffle() {
     : (windowSeats.size / N) * ((2 * ROWS * (COLS - 1) + 2 * COLS * (ROWS - 1)) / (N - 1));
 
   const conditionMet = checkCondition(assignment);
+  const pos0 = assignment.indexOf(0); // seat index of A
+  const pos1 = assignment.indexOf(1); // seat index of B
+
+  // Which seats should show the "condition met" glow
+  const isHitSeat = (idx) => {
+    if (!conditionMet) return false;
+    if (condition === 'window') return idx === pos0;
+    if (condition === 'adjacent') return idx === pos0 || idx === pos1;
+    if (condition === 'both') return idx === pos0 || idx === pos1;
+    return false;
+  };
 
   return (
     <div className="card">
@@ -94,17 +105,22 @@ export function SeatShuffle() {
               const isSpecial = specialStudents.includes(studentId);
               const isWindow = windowSeats.has(idx);
               const color = isSpecial ? COLORS[studentId] : null;
+              const hit = isHitSeat(idx);
               return (
                 <div key={seat.id} style={{
                   width: '100%', paddingBottom: '80%', position: 'relative',
                   borderRadius: 4,
-                  background: color ? `${color}22` : isWindow ? 'rgba(255,255,255,0.05)' : 'var(--bg-secondary)',
-                  border: `1px solid ${color ? color + '66' : isWindow ? 'rgba(255,255,255,0.1)' : 'transparent'}`,
-                  transition: 'background 300ms, border-color 300ms',
+                  background: hit ? `${color}55` : color ? `${color}22` : isWindow ? 'rgba(255,255,255,0.05)' : 'var(--bg-secondary)',
+                  border: `${hit ? 2 : 1}px solid ${hit ? color : color ? color + '66' : isWindow ? 'rgba(255,255,255,0.15)' : 'transparent'}`,
+                  boxShadow: hit ? `0 0 8px ${color}99, 0 0 2px ${color}` : 'none',
+                  transform: hit ? 'scale(1.12)' : 'scale(1)',
+                  transition: 'all 250ms ease',
+                  zIndex: hit ? 1 : 0,
                 }}>
                   <div style={{
                     position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: 8, fontWeight: color ? 700 : 400, color: color || (isWindow ? 'var(--text-muted)' : 'var(--text-subtle)'),
+                    fontSize: hit ? 9 : 8, fontWeight: color ? 700 : 400,
+                    color: hit ? '#fff' : color || (isWindow ? 'var(--text-muted)' : 'var(--text-subtle)'),
                   }}>
                     {isSpecial ? ['A', 'B', 'C', 'D'][studentId] : studentId + 1}
                   </div>
@@ -113,7 +129,7 @@ export function SeatShuffle() {
             })}
           </div>
           <div style={{ fontSize: 10, color: 'var(--text-subtle)', marginTop: 8 }}>
-            🟦A=生徒A（紫=B, 緑=C, 黄=D）　窓側列 = 薄枠
+            🟦A=生徒A（紫=B, 緑=C, 黄=D）　窓側列 = 薄枠　✨条件成立席 = 光る
           </div>
         </div>
 

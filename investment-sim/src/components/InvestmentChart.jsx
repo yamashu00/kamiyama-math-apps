@@ -30,7 +30,11 @@ export function InvestmentChart() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#191a1b';
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    const bgColor = isLight ? '#f0f2f5' : '#191a1b';
+    const labelColor = isLight ? '#374151' : '#b0b8c8';
+    const gridColor = isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.06)';
+    ctx.fillStyle = bgColor;
     ctx.fillRect(0, 0, W, H);
 
     const gW = W - PAD.left - PAD.right;
@@ -51,22 +55,22 @@ export function InvestmentChart() {
     const toY = (v) => PAD.top + gH - (v / maxVal) * gH;
 
     // Grid lines
-    ctx.strokeStyle = 'rgba(255,255,255,0.05)';
+    ctx.strokeStyle = gridColor;
     ctx.lineWidth = 1;
     for (let i = 0; i <= 4; i++) {
       const y = PAD.top + (gH / 4) * i;
       ctx.beginPath(); ctx.moveTo(PAD.left, y); ctx.lineTo(W - PAD.right, y); ctx.stroke();
       const val = maxVal * (1 - i / 4);
-      ctx.fillStyle = '#62666d';
-      ctx.font = '10px Inter';
+      ctx.fillStyle = labelColor;
+      ctx.font = 'bold 11px Inter';
       ctx.textAlign = 'right';
       ctx.fillText(val >= 10000 ? `${Math.round(val / 10000)}万` : `${Math.round(val)}`, PAD.left - 6, y + 4);
     }
 
     // X axis labels
-    ctx.fillStyle = '#62666d';
+    ctx.fillStyle = labelColor;
     ctx.textAlign = 'center';
-    ctx.font = '10px Inter';
+    ctx.font = 'bold 11px Inter';
     for (let y = 0; y <= years; y += Math.max(1, Math.floor(years / 5))) {
       ctx.fillText(`${y}年`, toX(y), H - PAD.bottom + 16);
     }
