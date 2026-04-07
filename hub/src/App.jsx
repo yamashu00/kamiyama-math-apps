@@ -89,6 +89,227 @@ const HOW_STEPS = [
   'STEP 6 まで終わったら次のアプリへ移動',
 ];
 
+const CASES = [
+  {
+    id: 1, emoji: '📈', company: 'Renaissance Technologies',
+    country: '🇺🇸 アメリカ', category: '金融',
+    math: '確率論・統計学・時系列解析',
+    tagline: '数学者が作った「最強のヘッジファンド」',
+    story: '数学者・暗号解読者のJim Simonsは、1982年に金融の知識ゼロから投資会社を設立。「市場のパターンは数式で予測できる」という仮説を立て、物理学者・数学者のみをチームに集めた。彼らが開発したアルゴリズムは32年間で年平均62%のリターンを達成。これはバフェットの約3倍。',
+    impact: '運用資産$600億超。Simons個人資産は$3兆円超（2024年）。',
+    color: '#5e6ad2',
+    appLink: { num: '01', title: '投資の数学', url: 'https://kamiyama-math-apps-yw3k.vercel.app/' },
+  },
+  {
+    id: 2, emoji: '🤖', company: 'Arithmer（アリスマー）',
+    country: '🇯🇵 日本・東大発', category: 'AI',
+    math: '偏微分方程式・トポロジー・AI数理',
+    tagline: '「数学でビジネスになるの？」への真っ向勝負',
+    story: '東大数理科学研究科出身の大田佳宏氏が2015年に創業。「最先端の数学を産業に応用する」をミッションに、浸水予測AI・工場火災の予兆保全AI・自動採寸AIを開発。「100の計算を3ステップに圧縮する」という数学的発想がスマホでのリアルタイム処理を可能にした。日本初の「数学ベンチャー」として注目。',
+    impact: '20種類以上のAIソリューションを提供。日本クリエイション大賞2020受賞。',
+    color: '#10b981',
+    appLink: null,
+  },
+  {
+    id: 3, emoji: '🔍', company: 'Palantir Technologies',
+    country: '🇺🇸 アメリカ', category: 'データ分析',
+    math: '線形代数・グラフ理論・統計的推論',
+    tagline: '「見えないデータをつなぐ」で時価総額$200B超',
+    story: '2003年にPeter Thielらが創業。複数のデータソースを統合・分析するプラットフォームを開発。テロ対策・感染症追跡・軍事作戦など「バラバラなデータを数学的に統合すると何が見えるか」を事業にした。名前は指輪物語の「すべてを見通す球体」に由来。',
+    impact: '時価総額$200B超（2025年）。米政府・軍・大企業が顧客。',
+    color: '#f59e0b',
+    appLink: null,
+  },
+  {
+    id: 4, emoji: '🎵', company: 'Spotify',
+    country: '🇸🇪 スウェーデン', category: '音楽',
+    math: 'フーリエ解析・機械学習・協調フィルタリング',
+    tagline: '音楽の「波形」を数学で分解してレコメンド',
+    story: '2006年創業。楽曲のレコメンドには2種類の数学が使われる。①フーリエ解析：音の波形を周波数に分解して「この曲は明るい/暗い、速い/遅い」を数値化。②行列分解：「この人が好きな曲を好きな人は何を聴いているか」をビッグデータから計算。授業で体験したsin波が音楽ビジネスの核心にある。',
+    impact: 'ユーザー6億人超、有料会員2.5億人。時価総額$1,000億超。',
+    color: '#a855f7',
+    appLink: { num: '04', title: '音波ビジュアライザー', url: 'https://kamiyama-math-apps.vercel.app/' },
+  },
+  {
+    id: 5, emoji: '🎬', company: 'Netflix',
+    country: '🇺🇸 アメリカ', category: '動画',
+    math: '行列分解（SVD）・確率モデル・機械学習',
+    tagline: '$100万の懸賞金をかけた「数学コンテスト」が起源',
+    story: '2006年、Netflixは「レコメンド精度を10%改善したチームに$100万（約1.5億円）を払う」という懸賞を世界に発表。3年間・10万チームが参戦した数学コンテストの末、行列分解（SVD）を組み合わせたアルゴリズムが優勝。「あなたへのおすすめ」はこの数学で動いている。',
+    impact: '会員2.7億人。レコメンドで年間$10億のコスト削減と推定。',
+    color: '#ec4899',
+    appLink: { num: '05', title: '面積パズル', url: 'https://kamiyama-math-apps-iiqk.vercel.app/' },
+  },
+  {
+    id: 6, emoji: '🔍', company: 'Google（広告オークション）',
+    country: '🇺🇸 アメリカ', category: '広告',
+    math: 'ゲーム理論・オークション理論・最適化',
+    tagline: 'ゲーム理論で年間$2,000億の広告収益を設計',
+    story: '検索結果の広告枠は「入札」で決まる。ただし最高額を入札した広告主が必ずしも最高額を払うわけではない。Googleは「2位の価格+1円」を払う「ビックリー・オークション」をベースに独自設計。これはノーベル経済学賞受賞のゲーム理論が基礎。「公平に見えながら収益を最大化する」数学的設計がGoogleの基盤。',
+    impact: 'Google広告収益は年間$2,380億（2023年）。売上の約77%。',
+    color: '#f59e0b',
+    appLink: { num: '02', title: '席替えの確率', url: 'https://kamiyama-math-apps-yk38.vercel.app/' },
+  },
+  {
+    id: 7, emoji: '🔐', company: 'RSA Security',
+    country: '🇺🇸 アメリカ', category: '暗号',
+    math: '素因数分解・数論・剰余算術',
+    tagline: '「解けない数学の問題」をそのままビジネスにした',
+    story: '1977年、MITの数学者3人（Rivest・Shamir・Adleman）が「巨大な数の素因数分解は現代のコンピュータでは解けない」という数学的事実を暗号に応用。2つの素数を掛けるのは簡単だが、その積から元の数を求めるのは事実上不可能——この非対称性がインターネットセキュリティの基礎になった。現在もHTTPS・銀行取引・パスポートICチップに使われている。',
+    impact: 'RSA暗号はインターネット全取引の基盤。世界の電子商取引$6兆を守る。',
+    color: '#14b8a6',
+    appLink: null,
+  },
+  {
+    id: 8, emoji: '🚚', company: 'UPS（ユナイテッド・パーセル・サービス）',
+    country: '🇺🇸 アメリカ', category: '物流',
+    math: 'グラフ理論・巡回セールスマン問題・最適化',
+    tagline: '「左折禁止ルール」で年$4億節約した数学',
+    story: 'UPSは2004年から「ORIONプロジェクト」を開始。1日5,000万件の配達ルートを数学的に最適化するシステムを開発した。発見の一つは「なるべく右折だけで走れ」。左折は対向車を待つ時間が発生し非効率。グラフ理論と最適化で全ルートを再設計した結果、燃料・時間・CO₂を劇的に削減。10年で$4億以上節約。',
+    impact: '年間燃料削減1億リットル超、CO₂排出削減10万トン超。',
+    color: '#10b981',
+    appLink: { num: '06', title: '図形と距離', url: 'https://kamiyama-math-apps-pdc8.vercel.app/' },
+  },
+  {
+    id: 9, emoji: '🦾', company: 'Preferred Networks（PFN）',
+    country: '🇯🇵 日本', category: 'ロボット',
+    math: 'トポロジー・深層学習・強化学習・微分幾何学',
+    tagline: '東大数学科発・日本最強のAIスタートアップ',
+    story: '2014年、東大数学科・情報系出身の西川徹氏らが創業。ロボットの動作制御・工場自動化・自動運転に特化した深層学習を開発。トヨタ・ファナックなど日本の製造業大手と提携し、工場ロボットがリアルタイムで学習・最適化するシステムを実現。「数学の抽象性が一番役に立つのは、誰も解いたことがない問題を解くとき」と創業者は語る。',
+    impact: '企業価値2,350億円超（2019年時点）。日本最大のAIスタートアップの一つ。',
+    color: '#a855f7',
+    appLink: null,
+  },
+];
+
+const CASE_CATEGORIES = ['すべて', '金融', 'AI', 'データ分析', '音楽', '動画', '広告', '暗号', '物流', 'ロボット'];
+
+function CaseModal({ c, onClose }) {
+  return (
+    <div style={{
+      position: 'fixed', inset: 0, zIndex: 100,
+      background: 'rgba(0,0,0,0.75)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center',
+      padding: 20, overflowY: 'auto',
+    }} onClick={onClose}>
+      <div style={{
+        background: 'var(--panel)',
+        border: `1px solid ${c.color}44`,
+        borderRadius: 18,
+        padding: '28px 32px',
+        maxWidth: 560, width: '100%',
+        position: 'relative',
+      }} onClick={e => e.stopPropagation()}>
+        {/* top bar */}
+        <div style={{ height: 3, background: c.color, borderRadius: '18px 18px 0 0', position: 'absolute', top: 0, left: 0, right: 0 }} />
+
+        {/* header */}
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14, marginBottom: 20 }}>
+          <div style={{ fontSize: 40, lineHeight: 1 }}>{c.emoji}</div>
+          <div>
+            <div style={{ fontSize: 11, fontWeight: 600, letterSpacing: '0.7px', textTransform: 'uppercase', color: c.color, marginBottom: 4 }}>{c.country} · {c.category}</div>
+            <div style={{ fontSize: 20, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.3px', lineHeight: 1.2 }}>{c.company}</div>
+            <div style={{ fontSize: 13, color: 'var(--text-muted)', marginTop: 4 }}>{c.tagline}</div>
+          </div>
+        </div>
+
+        {/* math badge */}
+        <div style={{ display: 'inline-flex', alignItems: 'center', gap: 6, background: `${c.color}18`, border: `1px solid ${c.color}33`, borderRadius: 9999, padding: '4px 12px', marginBottom: 16 }}>
+          <span style={{ fontSize: 11 }}>🧮</span>
+          <span style={{ fontSize: 12, fontWeight: 600, color: c.color }}>{c.math}</span>
+        </div>
+
+        {/* story */}
+        <div style={{ marginBottom: 16 }}>
+          <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.8px', textTransform: 'uppercase', color: 'var(--text-subtle)', marginBottom: 8 }}>ストーリー</div>
+          <div style={{ fontSize: 13, color: 'var(--text-2)', lineHeight: 1.8 }}>{c.story}</div>
+        </div>
+
+        {/* impact */}
+        <div style={{ background: `${c.color}10`, border: `1px solid ${c.color}25`, borderRadius: 10, padding: '12px 16px', marginBottom: 20 }}>
+          <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.8px', textTransform: 'uppercase', color: 'var(--text-subtle)', marginBottom: 4 }}>インパクト</div>
+          <div style={{ fontSize: 13, fontWeight: 600, color: c.color }}>{c.impact}</div>
+        </div>
+
+        {/* app link */}
+        {c.appLink && (
+          <div style={{ marginBottom: 20 }}>
+            <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.8px', textTransform: 'uppercase', color: 'var(--text-subtle)', marginBottom: 8 }}>この授業で体験できる数学</div>
+            <a href={c.appLink.url} style={{
+              display: 'inline-flex', alignItems: 'center', gap: 8,
+              background: 'rgba(94,106,210,0.1)', border: '1px solid rgba(94,106,210,0.25)',
+              borderRadius: 8, padding: '8px 14px', textDecoration: 'none',
+              color: '#828fff', fontSize: 13, fontWeight: 500,
+            }}>
+              → App {c.appLink.num}: {c.appLink.title}で体験する
+            </a>
+          </div>
+        )}
+
+        <button onClick={onClose} style={{
+          background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
+          borderRadius: 6, padding: '8px 20px', color: 'var(--text-muted)',
+          fontSize: 13, cursor: 'pointer', fontFamily: 'inherit',
+        }}>閉じる</button>
+      </div>
+    </div>
+  );
+}
+
+function CasesSection() {
+  const [selectedCase, setSelectedCase] = useState(null);
+  const [activeCategory, setActiveCategory] = useState('すべて');
+
+  const filtered = activeCategory === 'すべて' ? CASES : CASES.filter(c => c.category === activeCategory);
+
+  return (
+    <div className="cases-section">
+      {selectedCase && <CaseModal c={selectedCase} onClose={() => setSelectedCase(null)} />}
+
+      <div className="section-label" style={{ marginBottom: 16 }}>
+        💡 数学で起業した人たち — カードをクリックしてストーリーを読む
+      </div>
+
+      {/* Category tabs */}
+      <div className="cases-tabs">
+        {CASE_CATEGORIES.map(cat => (
+          <button
+            key={cat}
+            className={`cases-tab${activeCategory === cat ? ' active' : ''}`}
+            onClick={() => setActiveCategory(cat)}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      {/* Cards grid */}
+      <div className="cases-grid">
+        {filtered.map(c => (
+          <div key={c.id} className="case-card" onClick={() => setSelectedCase(c)}>
+            <div className="case-card-bar" style={{ background: c.color }} />
+            <div className="case-card-body">
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+                <span style={{ fontSize: 32 }}>{c.emoji}</span>
+                <div>
+                  <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.6px', textTransform: 'uppercase', color: c.color, marginBottom: 2 }}>{c.country} · {c.category}</div>
+                  <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--text)', letterSpacing: '-0.2px', lineHeight: 1.2 }}>{c.company}</div>
+                </div>
+              </div>
+              <div style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.5, marginBottom: 12 }}>{c.tagline}</div>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 5, background: `${c.color}18`, border: `1px solid ${c.color}30`, borderRadius: 9999, padding: '3px 10px' }}>
+                <span style={{ fontSize: 10 }}>🧮</span>
+                <span style={{ fontSize: 11, fontWeight: 600, color: c.color }}>{c.math}</span>
+              </div>
+              <div style={{ marginTop: 12, fontSize: 11, color: 'var(--text-subtle)', fontWeight: 500 }}>タップして詳細を読む →</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function QrModal({ app, onClose }) {
   const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(app.url)}&bgcolor=0f1011&color=f7f8f8&qzone=1`;
   return (
@@ -148,7 +369,7 @@ function TeacherPanel() {
         cursor: 'pointer', fontFamily: 'inherit', width: '100%',
       }}>
         <span>📚</span>
-        <span>教員向け解説メモ</span>
+        <span>学びのポイント</span>
         <span style={{ marginLeft: 'auto', fontSize: 11 }}>{open ? '▲ 閉じる' : '▼ 開く'}</span>
       </button>
 
@@ -160,7 +381,6 @@ function TeacherPanel() {
           borderRadius: 14,
           overflow: 'hidden',
         }}>
-          {/* Tab selector */}
           <div style={{
             display: 'flex', overflowX: 'auto',
             borderBottom: '1px solid rgba(255,255,255,0.06)',
@@ -182,17 +402,13 @@ function TeacherPanel() {
             ))}
           </div>
 
-          {/* Content */}
           <div style={{ padding: '24px 28px', display: 'flex', flexDirection: 'column', gap: 20 }}>
-            {/* Point */}
             <div>
               <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.8px', textTransform: 'uppercase', color: '#62666d', marginBottom: 8 }}>授業のポイント</div>
               <div style={{ fontSize: 13, color: '#d0d6e0', lineHeight: 1.7, padding: '12px 16px', background: `${app.color}0f`, border: `1px solid ${app.color}25`, borderRadius: 8 }}>
                 {app.teacherNote.point}
               </div>
             </div>
-
-            {/* Steps */}
             <div>
               <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.8px', textTransform: 'uppercase', color: '#62666d', marginBottom: 8 }}>推奨ファシリテーション手順</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
@@ -209,16 +425,12 @@ function TeacherPanel() {
                 ))}
               </div>
             </div>
-
-            {/* Question */}
             <div>
               <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.8px', textTransform: 'uppercase', color: '#62666d', marginBottom: 8 }}>核心の問い（意図）</div>
               <div style={{ fontSize: 13, color: '#d0d6e0', lineHeight: 1.7, padding: '12px 16px', background: 'rgba(94,106,210,0.06)', border: '1px solid rgba(94,106,210,0.15)', borderRadius: 8 }}>
                 {app.teacherNote.question}
               </div>
             </div>
-
-            {/* Math connection */}
             <div>
               <div style={{ fontSize: 10, fontWeight: 600, letterSpacing: '0.8px', textTransform: 'uppercase', color: '#62666d', marginBottom: 8 }}>数学との接続</div>
               <div style={{ fontSize: 13, color: app.color, fontFamily: 'Georgia, serif', padding: '10px 14px', background: `${app.color}0c`, border: `1px solid ${app.color}22`, borderRadius: 8 }}>
@@ -295,7 +507,6 @@ export default function App() {
                   </div>
                 </div>
               </a>
-              {/* QR button */}
               <button className="qr-btn" onClick={() => setQrApp(app)} style={{ borderColor: `${app.color}33` }}>
                 <span>📷</span> QR
               </button>
@@ -318,6 +529,9 @@ export default function App() {
             </div>
           </div>
         </div>
+
+        {/* Cases section */}
+        <CasesSection />
 
         {/* Teacher panel */}
         <TeacherPanel />
