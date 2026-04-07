@@ -56,7 +56,7 @@ export const STEPS = [
     observation:
       '声の波形（複雑）も、sin の足し算で作った波形（複雑）も、同じような「うねうねした形」をしている。',
     question:
-      '❓ あなたの声も「sin 波の足し算」でできている、と言える。\nでは…\n・スマホで音楽を聴くとき（MP3・AACという形式）、この原理はどう使われている？\n・Wi-Fi や 4G の「電波」は何でできている？\n・MRI（病院の検査機器）が体の断面図を作るのに、なぜ数学が必要？',
+      '❓ あなたの声も「sin 波の足し算」でできている。\n・スマホのMP3、Wi-Fi、MRI — 全部この原理が使われている。どうして？\nヒント：フーリエ解析は「複雑な波 → sin の足し算」に分解する技術。\n→ 音とは無関係に生まれた数学が、現代技術の中枢にある。',
   },
   {
     id: 6,
@@ -71,6 +71,22 @@ export const STEPS = [
   },
 ];
 
+function QuestionText({ text }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+      {text.split('\n').filter(Boolean).map((line, i) => {
+        if (line.startsWith('❓'))
+          return <div key={i} style={{ fontSize: 14, fontWeight: 600, color: '#d0d6e0', lineHeight: 1.5 }}>{line}</div>;
+        if (line.startsWith('ヒント') || line.startsWith('・'))
+          return <div key={i} style={{ fontSize: 12, color: '#62666d', lineHeight: 1.6, paddingLeft: 4 }}>{line}</div>;
+        if (line.startsWith('→'))
+          return <div key={i} style={{ fontSize: 13, color: '#828fff', lineHeight: 1.5, fontWeight: 500 }}>{line}</div>;
+        return <div key={i} style={{ fontSize: 13, color: '#8a8f98', lineHeight: 1.6 }}>{line}</div>;
+      })}
+    </div>
+  );
+}
+
 export function StepGuide({ currentStep, onNext, onPrev }) {
   const step = STEPS[currentStep];
   const total = STEPS.length;
@@ -79,77 +95,42 @@ export function StepGuide({ currentStep, onNext, onPrev }) {
 
   return (
     <div className="step-guide-card">
-      {/* Progress dots */}
       <div className="step-dots">
         {STEPS.map((s, i) => (
-          <div
-            key={s.id}
-            className={`step-dot ${i === currentStep ? 'active' : i < currentStep ? 'done' : ''}`}
-            title={s.label}
-          />
+          <div key={s.id} className={`step-dot ${i === currentStep ? 'active' : i < currentStep ? 'done' : ''}`} title={s.label} />
         ))}
       </div>
-
-      {/* Step counter */}
       <div className="step-meta">
         <span className="step-counter">STEP {step.id} / {total}</span>
         <span className="step-label-text">{step.label}</span>
       </div>
-
-      {/* Title */}
       <h2 className="step-title">{step.title}</h2>
-
-      {/* Instruction */}
       <div className="step-section">
         <div className="step-section-label">やること</div>
         <div className="step-instruction">{step.instruction}</div>
       </div>
-
-      {/* Observation */}
       {step.observation && (
         <div className="step-section">
           <div className="step-section-label">観察ポイント</div>
           <div className="step-observation">{step.observation}</div>
         </div>
       )}
-
-      {/* Question */}
       {step.question && (
         <div className="step-question-box">
-          <div className="step-question-text">{step.question}</div>
+          <QuestionText text={step.question} />
         </div>
       )}
-
-      {/* Navigation */}
       <div className="step-nav">
-        <button
-          className="btn btn-ghost"
-          onClick={onPrev}
-          disabled={isFirst}
-          style={{ opacity: isFirst ? 0.3 : 1 }}
-        >
-          ← 前のステップ
+        <button className="btn btn-ghost" onClick={onPrev} disabled={isFirst} style={{ opacity: isFirst ? 0.3 : 1 }}>
+          ← 前
         </button>
         <div className="step-progress-bar">
-          <div
-            className="step-progress-fill"
-            style={{ width: `${((currentStep + 1) / total) * 100}%` }}
-          />
+          <div className="step-progress-fill" style={{ width: `${((currentStep + 1) / total) * 100}%` }} />
         </div>
         {!isLast ? (
-          <button className="btn btn-primary" onClick={onNext}>
-            次のステップ →
-          </button>
+          <button className="btn btn-primary" onClick={onNext}>次 →</button>
         ) : (
-          <button
-            className="btn"
-            style={{
-              background: 'rgba(16,185,129,0.12)',
-              color: '#10b981',
-              border: '1px solid rgba(16,185,129,0.3)',
-            }}
-            onClick={() => {}}
-          >
+          <button className="btn" style={{ background: 'rgba(16,185,129,0.12)', color: '#10b981', border: '1px solid rgba(16,185,129,0.3)' }}>
             ✓ 完了！
           </button>
         )}

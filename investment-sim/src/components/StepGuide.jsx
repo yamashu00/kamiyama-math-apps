@@ -43,6 +43,22 @@ export const STEPS = [
   },
 ];
 
+function QuestionText({ text }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+      {text.split('\n').filter(Boolean).map((line, i) => {
+        if (line.startsWith('❓'))
+          return <div key={i} style={{ fontSize: 14, fontWeight: 600, color: '#d0d6e0', lineHeight: 1.5 }}>{line}</div>;
+        if (line.startsWith('ヒント') || line.startsWith('・'))
+          return <div key={i} style={{ fontSize: 12, color: '#62666d', lineHeight: 1.6, paddingLeft: 4 }}>{line}</div>;
+        if (line.startsWith('→'))
+          return <div key={i} style={{ fontSize: 13, color: '#828fff', lineHeight: 1.5, fontWeight: 500 }}>{line}</div>;
+        return <div key={i} style={{ fontSize: 13, color: '#8a8f98', lineHeight: 1.6 }}>{line}</div>;
+      })}
+    </div>
+  );
+}
+
 export function StepGuide({ currentStep, onNext, onPrev }) {
   const step = STEPS[currentStep];
   const total = STEPS.length;
@@ -70,7 +86,7 @@ export function StepGuide({ currentStep, onNext, onPrev }) {
       )}
       {step.question && (
         <div className="step-question-box">
-          <div className="step-question-text">{step.question}</div>
+          <QuestionText text={step.question} />
         </div>
       )}
       <div className="step-nav">

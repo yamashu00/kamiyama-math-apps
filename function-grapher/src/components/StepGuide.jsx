@@ -7,6 +7,22 @@ export const STEPS = [
   { id:6, label:'まとめ', title:'関数は「変化のパターン」を分類する道具', instruction:'まとめカードを読もう。関数の種類と日常の対応を確認して。', observation:null, question:'❓ あなたの日常の「変化」を1つ選んで、それが一次・二次・冪・無理関数のどれに近いか考えよう。\n例：SNSのフォロワー増加、体の成長、スマホの充電残量、etc.' },
 ];
 
+function QuestionText({ text }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
+      {text.split('\n').filter(Boolean).map((line, i) => {
+        if (line.startsWith('❓'))
+          return <div key={i} style={{ fontSize: 14, fontWeight: 600, color: '#d0d6e0', lineHeight: 1.5 }}>{line}</div>;
+        if (line.startsWith('ヒント') || line.startsWith('・'))
+          return <div key={i} style={{ fontSize: 12, color: '#62666d', lineHeight: 1.6, paddingLeft: 4 }}>{line}</div>;
+        if (line.startsWith('→'))
+          return <div key={i} style={{ fontSize: 13, color: '#828fff', lineHeight: 1.5, fontWeight: 500 }}>{line}</div>;
+        return <div key={i} style={{ fontSize: 13, color: '#8a8f98', lineHeight: 1.6 }}>{line}</div>;
+      })}
+    </div>
+  );
+}
+
 export function StepGuide({ currentStep, onNext, onPrev }) {
   const step = STEPS[currentStep], total = STEPS.length;
   return (
@@ -16,7 +32,7 @@ export function StepGuide({ currentStep, onNext, onPrev }) {
       <h2 className="step-title">{step.title}</h2>
       <div className="step-section"><div className="step-section-label">やること</div><div className="step-instruction">{step.instruction}</div></div>
       {step.observation && <div className="step-section"><div className="step-section-label">観察ポイント</div><div className="step-observation">{step.observation}</div></div>}
-      {step.question && <div className="step-question-box"><div className="step-question-text">{step.question}</div></div>}
+      {step.question && <div className="step-question-box"><QuestionText text={step.question} /></div>}
       <div className="step-nav">
         <button className="btn btn-ghost" onClick={onPrev} disabled={currentStep===0} style={{opacity:currentStep===0?0.3:1}}>← 前</button>
         <div className="step-progress-bar"><div className="step-progress-fill" style={{width:`${((currentStep+1)/total)*100}%`}} /></div>
