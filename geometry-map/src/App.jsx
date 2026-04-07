@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { CoordinatePlane } from './components/CoordinatePlane';
 import { StepGuide, STEPS } from './components/StepGuide';
 
+const HUB_URL = 'https://kamiyama-math-hub.vercel.app/';
+
 const REAL_WORLD = [
   { icon: '🗺️', title: 'GPS・カーナビ', body: '緯度・経度の差を「a, b」として距離を計算。球面上では「球面三角法」が必要になる（cos/sin が登場）。', math: '三平方の定理 → 球面三角法' },
   { icon: '🎮', title: 'ゲームの当たり判定', body: '2キャラクターの距離を毎フレーム計算。距離 d < 当たり半径 r なら衝突。60fps = 毎秒この計算を60回。', math: 'ユークリッド距離 √(Δx²+Δy²)' },
@@ -15,6 +17,11 @@ export default function App() {
     <div className="app">
       <header className="app-header">
         <div className="app-header-inner">
+          <div className="app-header-top">
+            <a href={HUB_URL} className="btn-back">← 一覧に戻る</a>
+            <span className="app-time-badge">⏱ 約5〜7分</span>
+            <span className="app-time-badge">App 6 / 6</span>
+          </div>
           <h1 className="app-title">📍 図形と距離 <span className="app-title-badge">基礎数学Ⅰ</span></h1>
           <p className="app-subtitle">三平方の定理 — GPS からゲームまで支える2500年前の数学</p>
         </div>

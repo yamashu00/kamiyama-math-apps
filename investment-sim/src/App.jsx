@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { InvestmentChart } from './components/InvestmentChart';
 import { StepGuide, STEPS } from './components/StepGuide';
 
+const HUB_URL = 'https://kamiyama-math-hub.vercel.app/';
+
 const REAL_WORLD = [
   { icon: '🏦', title: '銀行預金・NISA', body: '複利で運用される。20年・30年でつみたてNISA（年利5%想定）の効果を体感できる。', math: '等比数列の和' },
   { icon: '🏠', title: '住宅ローン', body: '同じ複利の仕組みが「借金側」に働く。金利が低くても30年で大きな差になる。', math: '等比数列' },
@@ -15,6 +17,11 @@ export default function App() {
     <div className="app">
       <header className="app-header">
         <div className="app-header-inner">
+          <div className="app-header-top">
+            <a href={HUB_URL} className="btn-back">← 一覧に戻る</a>
+            <span className="app-time-badge">⏱ 約5〜7分</span>
+            <span className="app-time-badge">App 1 / 6</span>
+          </div>
           <h1 className="app-title">💰 投資の数学 <span className="app-title-badge">基礎数学Ⅰ</span></h1>
           <p className="app-subtitle">複利と等比数列 — お金の増え方の仕組みを数学で見る</p>
         </div>

@@ -55,6 +55,18 @@ export function SeatShuffle() {
     setHistory(h => ({ trials: h.trials + 1, hits: h.hits + (hit ? 1 : 0) }));
   }, [checkCondition]);
 
+  const doShuffleN = useCallback((n) => {
+    let lastAsgn;
+    let hits = 0;
+    for (let i = 0; i < n; i++) {
+      const newAsgn = shuffle(Array.from({ length: N }, (_, j) => j));
+      if (checkCondition(newAsgn)) hits++;
+      lastAsgn = newAsgn;
+    }
+    setAssignment(lastAsgn);
+    setHistory(h => ({ trials: h.trials + n, hits: h.hits + hits }));
+  }, [checkCondition]);
+
   const resetHistory = () => setHistory({ trials: 0, hits: 0 });
 
   // Theoretical probabilities
@@ -139,8 +151,11 @@ export function SeatShuffle() {
           <button className="btn btn-primary" onClick={doShuffle} style={{ fontSize: 14, padding: '10px 24px' }}>
             🔀 席替え！
           </button>
-          <button className="btn btn-ghost" onClick={() => { doShuffle(); }}>
+          <button className="btn btn-ghost" onClick={() => doShuffleN(10)}>
             ×10 連続
+          </button>
+          <button className="btn btn-ghost" onClick={() => doShuffleN(100)}>
+            ×100 連続
           </button>
           <button className="btn btn-ghost" onClick={resetHistory}>リセット</button>
         </div>

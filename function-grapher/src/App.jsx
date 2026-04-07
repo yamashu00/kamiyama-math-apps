@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { FunctionGraph } from './components/FunctionGraph';
 import { StepGuide, STEPS } from './components/StepGuide';
 
+const HUB_URL = 'https://kamiyama-math-hub.vercel.app/';
+
 const REAL_WORLD = [
   { icon: '🚗', title: 'カーナビ・自動運転', body: '速度（一次）、加速度（二次）、位置の予測まですべて関数でモデル化。自動ブレーキは「このまま進むと衝突するか？」を関数で計算する。', math: '一次・二次関数' },
   { icon: '💡', title: '電力・電気回路', body: '電流・電圧・電力の関係 P = V²/R は冪関数。LEDの明るさ調整も関数で制御される。', math: '冪関数 y = ax²' },
@@ -15,6 +17,11 @@ export default function App() {
     <div className="app">
       <header className="app-header">
         <div className="app-header-inner">
+          <div className="app-header-top">
+            <a href={HUB_URL} className="btn-back">← 一覧に戻る</a>
+            <span className="app-time-badge">⏱ 約5〜7分</span>
+            <span className="app-time-badge">App 3 / 6</span>
+          </div>
           <h1 className="app-title">📐 関数グラフ <span className="app-title-badge">基礎数学Ⅰ</span></h1>
           <p className="app-subtitle">関数 — 変化の形を式で読み書きする</p>
         </div>

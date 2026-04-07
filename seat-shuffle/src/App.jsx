@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { SeatShuffle } from './components/SeatShuffle';
 import { StepGuide, STEPS } from './components/StepGuide';
 
+const HUB_URL = 'https://kamiyama-math-hub.vercel.app/';
+
 const REAL_WORLD = [
   { icon: '🎰', title: 'パチンコ・宝くじの仕組み', body: '1等が当たる確率は1/数百万。確率の計算で「期待値」を求めると、参加者は平均的に損することがわかる。', math: '期待値 = 確率 × 賞金' },
   { icon: '🧬', title: 'DNA検査・裁判の証拠', body: 'DNA鑑定の一致確率は1/数億。「一致した」だけで有罪とは言えない理由も確率で説明できる。', math: '条件付き確率（ベイズ定理）' },
@@ -15,6 +17,11 @@ export default function App() {
     <div className="app">
       <header className="app-header">
         <div className="app-header-inner">
+          <div className="app-header-top">
+            <a href={HUB_URL} className="btn-back">← 一覧に戻る</a>
+            <span className="app-time-badge">⏱ 約5〜7分</span>
+            <span className="app-time-badge">App 2 / 6</span>
+          </div>
           <h1 className="app-title">🪑 席替えの確率 <span className="app-title-badge">基礎数学Ⅰ</span></h1>
           <p className="app-subtitle">確率・組み合わせ — 「公平な席替え」を数学で考える</p>
         </div>

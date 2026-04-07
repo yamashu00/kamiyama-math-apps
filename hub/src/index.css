@@ -315,6 +315,31 @@ body {
   line-height: 1.6;
 }
 
+/* ── QR Button ── */
+.qr-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  padding: 8px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-subtle);
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--border);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 150ms, color 150ms;
+  border-radius: 0 0 var(--r-xl) var(--r-xl);
+}
+
+.qr-btn:hover {
+  background: rgba(255,255,255,0.04);
+  color: var(--text-muted);
+}
+
 /* ── Footer ── */
 .footer {
   border-top: 1px solid var(--border);

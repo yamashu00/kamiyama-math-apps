@@ -3,6 +3,8 @@ import { MicVisualizer } from './components/MicVisualizer';
 import { SinSynthesizer } from './components/SinSynthesizer';
 import { StepGuide, STEPS } from './components/StepGuide';
 
+const HUB_URL = 'https://kamiyama-math-hub.vercel.app/';
+
 const REAL_WORLD = [
   {
     icon: '📱',
@@ -41,6 +43,11 @@ export default function App() {
     <div className="app">
       <header className="app-header">
         <div className="app-header-inner">
+          <div className="app-header-top">
+            <a href={HUB_URL} className="btn-back">← 一覧に戻る</a>
+            <span className="app-time-badge">⏱ 約5〜7分</span>
+            <span className="app-time-badge">App 4 / 6</span>
+          </div>
           <h1 className="app-title">
             🎵 音の数学
             <span className="app-title-badge">基礎数学Ⅰ</span>

@@ -693,3 +693,42 @@ input[type='range']::-moz-range-thumb {
   color: var(--text-muted);
   line-height: 1.7;
 }
+
+/* === App header top row (back button + time) === */
+.app-header-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-solid);
+  border-radius: var(--radius-sm);
+  padding: 5px 12px;
+  text-decoration: none;
+  transition: background 120ms, color 120ms;
+}
+
+.btn-back:hover {
+  background: rgba(255,255,255,0.08);
+  color: var(--text-secondary);
+}
+
+.app-time-badge {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-subtle);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-solid);
+  border-radius: 9999px;
+  padding: 3px 10px;
+}
+

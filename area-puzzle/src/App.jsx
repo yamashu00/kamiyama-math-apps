@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { AreaVisualizer } from './components/AreaVisualizer';
 import { StepGuide, STEPS } from './components/StepGuide';
 
+const HUB_URL = 'https://kamiyama-math-hub.vercel.app/';
+
 const REAL_WORLD = [
   { icon: '🏥', title: 'CT・MRI（医療）', body: 'X線の透過量を積分→逆変換で体の断面図を再構成。積分なしに現代の医療診断は成立しない。', math: 'ラドン変換（積分）' },
   { icon: '🚀', title: 'ロケット・宇宙工学', body: 'ロケットの燃料消費量と推力の積分が「衝撃量」。どれだけの速度変化が得られるかを計算。', math: '積分（力学的衝撃）' },
@@ -15,6 +17,11 @@ export default function App() {
     <div className="app">
       <header className="app-header">
         <div className="app-header-inner">
+          <div className="app-header-top">
+            <a href={HUB_URL} className="btn-back">← 一覧に戻る</a>
+            <span className="app-time-badge">⏱ 約5〜7分</span>
+            <span className="app-time-badge">App 5 / 6</span>
+          </div>
           <h1 className="app-title">∫ 面積パズル <span className="app-title-badge">基礎数学Ⅰ</span></h1>
           <p className="app-subtitle">微積分への入口 — 「細かく分けて足す」という考え方</p>
         </div>
