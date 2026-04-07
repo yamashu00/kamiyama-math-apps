@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { SeatShuffle } from './components/SeatShuffle';
 import { StepGuide, STEPS } from './components/StepGuide';
 
-const HUB_URL = 'https://kamiyama-math-hub.vercel.app/';
+const HUB_URL = 'https://kamiyama-math-apps-da8y.vercel.app/';
 
 const REAL_WORLD = [
   { icon: '🎰', title: 'パチンコ・宝くじの仕組み', body: '1等が当たる確率は1/数百万。確率の計算で「期待値」を求めると、参加者は平均的に損することがわかる。', math: '期待値 = 確率 × 賞金' },

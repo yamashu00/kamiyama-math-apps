@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { AreaVisualizer } from './components/AreaVisualizer';
 import { StepGuide, STEPS } from './components/StepGuide';
 
-const HUB_URL = 'https://kamiyama-math-hub.vercel.app/';
+const HUB_URL = 'https://kamiyama-math-apps-da8y.vercel.app/';
 
 const REAL_WORLD = [
   { icon: '🏥', title: 'CT・MRI（医療）', body: 'X線の透過量を積分→逆変換で体の断面図を再構成。積分なしに現代の医療診断は成立しない。', math: 'ラドン変換（積分）' },

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { CoordinatePlane } from './components/CoordinatePlane';
 import { StepGuide, STEPS } from './components/StepGuide';
 
-const HUB_URL = 'https://kamiyama-math-hub.vercel.app/';
+const HUB_URL = 'https://kamiyama-math-apps-da8y.vercel.app/';
 
 const REAL_WORLD = [
   { icon: '🗺️', title: 'GPS・カーナビ', body: '緯度・経度の差を「a, b」として距離を計算。球面上では「球面三角法」が必要になる（cos/sin が登場）。', math: '三平方の定理 → 球面三角法' },

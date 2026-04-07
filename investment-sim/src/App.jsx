@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { InvestmentChart } from './components/InvestmentChart';
 import { StepGuide, STEPS } from './components/StepGuide';
 
-const HUB_URL = 'https://kamiyama-math-hub.vercel.app/';
+const HUB_URL = 'https://kamiyama-math-apps-da8y.vercel.app/';
 
 const REAL_WORLD = [
   { icon: '🏦', title: '銀行預金・NISA', body: '複利で運用される。20年・30年でつみたてNISA（年利5%想定）の効果を体感できる。', math: '等比数列の和' },

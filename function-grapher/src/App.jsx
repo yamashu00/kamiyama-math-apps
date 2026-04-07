@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FunctionGraph } from './components/FunctionGraph';
 import { StepGuide, STEPS } from './components/StepGuide';
 
-const HUB_URL = 'https://kamiyama-math-hub.vercel.app/';
+const HUB_URL = 'https://kamiyama-math-apps-da8y.vercel.app/';
 
 const REAL_WORLD = [
   { icon: '🚗', title: 'カーナビ・自動運転', body: '速度（一次）、加速度（二次）、位置の予測まですべて関数でモデル化。自動ブレーキは「このまま進むと衝突するか？」を関数で計算する。', math: '一次・二次関数' },

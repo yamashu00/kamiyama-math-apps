@@ -3,7 +3,7 @@ import { MicVisualizer } from './components/MicVisualizer';
 import { SinSynthesizer } from './components/SinSynthesizer';
 import { StepGuide, STEPS } from './components/StepGuide';
 
-const HUB_URL = 'https://kamiyama-math-hub.vercel.app/';
+const HUB_URL = 'https://kamiyama-math-apps-da8y.vercel.app/';
 
 const REAL_WORLD = [
   {
