@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
+import { Formula } from './Formula';
 
 const W = 800, H = 400;
 const CX = W / 2, CY = H / 2, SCALE = 40;
@@ -147,8 +148,8 @@ export function CoordinatePlane() {
 
             <div className="formula-box">
               <div className="formula-label">三平方の定理による計算</div>
-              <div className="formula-text">
-                c = √(a² + b²) = √({dx.toFixed(1)}² + {dy.toFixed(1)}²) = √{(dx*dx + dy*dy).toFixed(2)} = <span style={{ color: '#10b981' }}>{dist.toFixed(4)}</span>
+              <div className="formula-text" style={{ fontSize: 17 }}>
+                <Formula tex={`c = \\sqrt{a^2 + b^2} = \\sqrt{${dx.toFixed(1)}^2 + ${dy.toFixed(1)}^2} = \\sqrt{${(dx*dx+dy*dy).toFixed(2)}} = {\\color{#10b981} ${dist.toFixed(4)}}`} />
               </div>
             </div>
           </>

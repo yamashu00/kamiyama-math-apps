@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
+import { Formula } from './Formula';
 
 const W = 800, H = 300;
 const PAD = { top: 20, right: 20, bottom: 40, left: 60 };
@@ -164,9 +165,9 @@ export function InvestmentChart() {
 
         <div className="formula-box">
           <div className="formula-label">数式（等比数列の和）</div>
-          <div className="formula-text">
-            {`S = m × ((1 + r)ⁿ − 1) / r`}
-            <span style={{ fontSize: 11, color: 'var(--text-subtle)', marginLeft: 12 }}>m=毎月額, r=月利, n=月数</span>
+          <div className="formula-text" style={{ fontSize: 17 }}>
+            <Formula tex={`S = m \\times \\frac{(1 + r)^n - 1}{r}`} />
+            <span style={{ fontSize: 11, color: 'var(--text-subtle)', marginLeft: 14 }}>m=毎月額, r=月利, n=月数</span>
           </div>
         </div>
 

@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
+import { Formula } from './Formula';
 
 const W = 800, H = 380;
 const CX = W / 2, CY = H / 2;
@@ -38,10 +39,10 @@ function drawGrid(ctx) {
 }
 
 const FUNCTIONS = {
-  linear:    { label: '一次関数', formula: (a, b) => `y = ${a}x + ${b}`, fn: (a, b) => x => a * x + b, color: '#5e6ad2', example: 'スロープの傾き・速さ×時間' },
-  quadratic: { label: '二次関数', formula: (a, b, c) => `y = ${a}x² + ${b}x + ${c}`, fn: (a, b, c) => x => a * x * x + b * x + c, color: '#a855f7', example: 'ボールの軌跡・橋のアーチ' },
-  power:     { label: '冪関数', formula: (a, n) => `y = ${a}x^${n}`, fn: (a, n) => x => a * Math.pow(Math.abs(x), n) * Math.sign(x), color: '#10b981', example: 'アルゴリズムの計算量 O(n²)' },
-  sqrt:      { label: '無理関数', formula: (a) => `y = ${a}√x`, fn: (a) => x => x >= 0 ? a * Math.sqrt(x) : NaN, color: '#f59e0b', example: '振り子の周期・ロケットの速度' },
+  linear:    { label: '一次関数', tex: (a, b) => `y = ${a}x ${b >= 0 ? '+' : '-'} ${Math.abs(b)}`, fn: (a, b) => x => a * x + b, color: '#5e6ad2', example: 'スロープの傾き・速さ×時間' },
+  quadratic: { label: '二次関数', tex: (a, b, c) => `y = ${a}x^2 ${b >= 0 ? '+' : '-'} ${Math.abs(b)}x ${c >= 0 ? '+' : '-'} ${Math.abs(c)}`, fn: (a, b, c) => x => a * x * x + b * x + c, color: '#a855f7', example: 'ボールの軌跡・橋のアーチ' },
+  power:     { label: '冪関数', tex: (a, n) => `y = ${a}x^{${n}}`, fn: (a, n) => x => a * Math.pow(Math.abs(x), n) * Math.sign(x), color: '#10b981', example: 'アルゴリズムの計算量 O(n²)' },
+  sqrt:      { label: '無理関数', tex: (a) => `y = ${a}\\sqrt{x}`, fn: (a) => x => x >= 0 ? a * Math.sqrt(x) : NaN, color: '#f59e0b', example: '振り子の周期・ロケットの速度' },
 };
 
 export function FunctionGraph() {
@@ -83,10 +84,10 @@ export function FunctionGraph() {
 
   const setP = (key, val) => setParams(p => ({ ...p, [key]: parseFloat(val) }));
 
-  const formula = type === 'linear' ? def.formula(params.a, params.b)
-    : type === 'quadratic' ? def.formula(params.a, params.b, params.c)
-    : type === 'power' ? def.formula(params.a, params.n)
-    : def.formula(params.a);
+  const tex = type === 'linear' ? def.tex(params.a, params.b)
+    : type === 'quadratic' ? def.tex(params.a, params.b, params.c)
+    : type === 'power' ? def.tex(params.a, params.n)
+    : def.tex(params.a);
 
   return (
     <div className="card">
@@ -142,7 +143,9 @@ export function FunctionGraph() {
 
         <div className="formula-box">
           <div className="formula-label">現在の数式</div>
-          <div className="formula-text" style={{ color: def.color }}>{formula}</div>
+          <div className="formula-text" style={{ color: def.color, fontSize: 18 }}>
+            <Formula tex={tex} />
+          </div>
         </div>
 
         <div className="msg msg-info" style={{ fontSize: 12 }}>

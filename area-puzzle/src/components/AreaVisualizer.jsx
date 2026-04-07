@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from 'react';
+import { Formula } from './Formula';
 
 const W = 800, H = 300;
 const PAD = { top: 20, right: 20, bottom: 40, left: 50 };
@@ -127,7 +128,10 @@ export function AreaVisualizer() {
 
         <div className="formula-box">
           <div className="formula-label">積分の定義</div>
-          <div className="formula-text">∫₀¹ {label} dx ≈ Σ f(xᵢ) × Δx　（長方形の面積の足し算）</div>
+          <div className="formula-text" style={{ fontSize: 17 }}>
+            <Formula tex={`\\int_0^1 f(x)\\,dx \\approx \\sum_{i=1}^{${bars}} f(x_i) \\cdot \\Delta x`} />
+            <span style={{ fontSize: 12, color: 'var(--text-subtle)', marginLeft: 12 }}>長方形の面積の足し算</span>
+          </div>
         </div>
 
         <div className="msg msg-info" style={{ fontSize: 12 }}>

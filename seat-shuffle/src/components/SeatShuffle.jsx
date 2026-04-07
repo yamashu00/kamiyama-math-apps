@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { Formula } from './Formula';
 
 // 44 seats: 4 rows × 11 cols
 const ROWS = 4, COLS = 11, N = ROWS * COLS;
@@ -178,7 +179,9 @@ export function SeatShuffle() {
 
         <div className="formula-box">
           <div className="formula-label">確率の基本公式</div>
-          <div className="formula-text">P = (条件を満たす場合の数) ÷ (全体の場合の数) = {(theoryProb * 100).toFixed(2)}%</div>
+          <div className="formula-text" style={{ fontSize: 17 }}>
+            <Formula tex={`P = \\frac{\\text{条件を満たす場合の数}}{\\text{全体の場合の数}} = ${(theoryProb * 100).toFixed(2)}\\%`} />
+          </div>
         </div>
       </div>
     </div>

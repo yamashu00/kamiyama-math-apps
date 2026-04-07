@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { MicVisualizer } from './components/MicVisualizer';
 import { SinSynthesizer } from './components/SinSynthesizer';
 import { StepGuide, STEPS } from './components/StepGuide';
+import { Formula } from './components/Formula';
 
 const HUB_URL = 'https://kamiyama-math-apps-da8y.vercel.app/';
 
@@ -119,8 +120,8 @@ export default function App() {
 
               <div className="summary-fourier-box">
                 <div className="summary-fourier-label">フーリエ級数展開（無限個の sin を足す式）</div>
-                <div className="summary-fourier-formula">
-                  f(x) = a₀/2 + Σ (aₙ cos nx + bₙ sin nx)
+                <div className="summary-fourier-formula" style={{ fontSize: 17 }}>
+                  <Formula tex={`f(x) = \\frac{a_0}{2} + \\sum_{n=1}^{\\infty}\\left(a_n \\cos nx + b_n \\sin nx\\right)`} display={true} />
                 </div>
                 <div className="summary-fourier-note">
                   この式1本で、世界中のあらゆる「繰り返す波」を表現できる。
